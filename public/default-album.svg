@@ -1,0 +1,4 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="500" fill="#333333"/>
+  <text x="250" y="250" text-anchor="middle" dy=".3em" fill="#666666" font-size="24" font-family="Arial, sans-serif">♪ Album</text>
+</svg>

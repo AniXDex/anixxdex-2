@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniXDex Music Player</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="aurora-container"></div>
+    
+    <div class="app-grid no-player" id="appGrid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <span class="material-icons" style="font-size: 32px; color: #09f;">music_note</span>
+                    <span class="logo-text">AniXDex</span>
+                </div>
+            </div>
+            
+            <ul class="nav-main">
+                <li><a href="#" class="nav-link active" data-page="home">
+                    <span class="material-icons">home</span>
+                    <span>Home</span>
+                </a></li>
+                <li><a href="#" class="nav-link" data-page="search">
+                    <span class="material-icons">search</span>
+                    <span>Search</span>
+                </a></li>
+                <li><a href="#" class="nav-link" data-page="library">
+                    <span class="material-icons">library_music</span>
+                    <span>Your Library</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="nav-buttons">
+                </div>
+                
+                <div class="search-container-wrapper">
+                    <div class="search-box-clean">
+                        <span class="material-icons search-icon-clean">search</span>
+                        <input type="text" class="search-input-clean" id="searchInput" placeholder="What do you want to listen to?">
+                    </div>
+                </div>
+                
+                <div class="user-controls">
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-scrollable">
+                <!-- Home Page -->
+                <div id="homePage" class="page">
+                    <h1 class="page-title">AniXDex</h1>
+                    <p class="page-subtitle">Music <span class="brand-name">Space</span></p>
+
+                    <!-- Trending Now -->
+                    <div class="home-section">
+                        <h3>Trending Now</h3>
+                        <div id="trendingSongs" class="section-grid">
+                            <div class="loading-spinner">Loading trending songs...</div>
+                        </div>
+                    </div>
+
+
+                    <!-- New Releases -->
+                    <div class="home-section">
+                        <h3>New Releases</h3>
+                        <div id="newReleases" class="section-grid">
+                            <div class="loading-spinner">Loading new releases...</div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Albums -->
+                    <div class="home-section">
+                        <h3>Featured Songs</h3>
+                        <div id="featuredAlbums" class="section-grid">
+                            <div class="loading-spinner">Loading featured albums...</div>
+                        </div>
+                    </div>
+
+                    <!-- Top Artists -->
+                    <div class="home-section">
+                        <h3>Top Artists</h3>
+                        <div id="topArtists" class="section-grid">
+                            <div class="loading-spinner">Loading top artists...</div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Playlists -->
+                    <div class="home-section">
+                        <h3>Other Songs</h3>
+                        <div id="featuredPlaylists" class="section-grid">
+                            <div class="loading-spinner">Loading featured playlists...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Page -->
+                <div id="searchPage" class="page hidden">
+                    <div class="search-tabs">
+                        <button class="search-tab active" data-tab="songs">Songs</button>
+                        <button class="search-tab" data-tab="albums">Albums</button>
+                        <button class="search-tab" data-tab="artists">Artists</button>
+                        <button class="search-tab" data-tab="playlists">Playlists</button>
+                    </div>
+                    <div id="searchResults">
+                        <div class="search-placeholder">
+                            <span class="material-icons">search</span>
+                            <h3>Search for music</h3>
+                            <p>Find your favorite songs, artists, albums, and playlists.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Library Page -->
+                <div id="libraryPage" class="page hidden">
+                    <h1 class="page-title">Your Library</h1>
+                    <div id="libraryContent">
+                        <div class="loading-spinner">Loading your library...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="playerOverlay" class="player-overlay">
+    <div class="overlay-background"></div>
+    
+    <button id="closeOverlayBtn" class="overlay-close">
+        <span class="material-icons">close</span>
+    </button>
+    
+    <div class="overlay-content">
+        <div class="overlay-left-column">
+            <div class="overlay-album">
+                <div class="album-wrapper">
+                    <img id="overlayPlayerImage" class="overlay-album-img" src="" alt="Album Art">
+                </div>
+            </div>
+            
+            <div class="overlay-info">
+                <h2 id="overlayTrackName" class="track-title">Unknown Track</h2>
+                <p id="overlayTrackArtist" class="track-artist">Unknown Artist</p>
+            </div>
+            
+            <div class="overlay-controls">
+                <button id="overlayPrevBtn" class="control-btn">
+                    <span class="material-icons">skip_previous</span>
+                </button>
+                <button id="overlayPlayBtn" class="control-btn play-btn">
+                    <span class="material-icons">play_arrow</span>
+                </button>
+                <button id="overlayNextBtn" class="control-btn">
+                    <span class="material-icons">skip_next</span>
+                </button>
+            </div>
+            
+            <div class="overlay-progress">
+                <div class="progress-container">
+                    <span id="overlayCurrentTime" class="time">0:00</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar">
+                            <div id="overlayProgressFill" class="progress-fill"></div>
+                            <div id="overlayProgressHandle" class="progress-handle"></div>
+                        </div>
+                        <input type="range" id="overlaySeekBar" class="progress-input" min="0" max="100" value="0">
+                    </div>
+                    <span id="overlayTotalTime" class="time">0:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overlay-right-column">
+            <div class="overlay-visualizer">
+                <div id="visualizerContainer" class="visualizer-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Responsive Bottom Player -->
+        <div class="player-bar hidden" id="playerBar">
+            <!-- Player Info -->
+            <div class="player-info">
+                <img id="playerImage" class="player-album-image" src="" alt="Album Art">
+                <div class="track-info">
+                    <div class="track-name" id="playerTrackName">Unknown Track</div>
+                    <div class="track-artist" id="playerTrackArtist">Unknown Artist</div>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="player-controls">
+                <div class="control-buttons">
+                    <button class="control-btn" id="shuffleBtn">
+                        <span class="material-icons">shuffle</span>
+                    </button>
+                    <button class="control-btn" id="prevBtn">
+                        <span class="material-icons">skip_previous</span>
+                    </button>
+                    <button class="control-btn play-btn" id="bottomPlayBtn">
+                        <span class="material-icons">play_arrow</span>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <span class="material-icons">skip_next</span>
+                    </button>
+                    <button class="control-btn" id="bottomRepeatBtn">
+                        <span class="material-icons">repeat</span>
+                    </button>
+                </div>
+
+                <div class="progress-bar-container">
+                    <span class="time-current" id="bottomCurrentTime">0:00</span>
+                    <div class="progress-bar">
+                        <div class="progress-bg">
+                            <div class="progress-fill" id="bottomProgressFill"></div>
+                            <div class="progress-handle" id="bottomProgressHandle"></div>
+                        </div>
+                        <input type="range" class="progress-input" id="bottomSeekBar" min="0" max="100" value="0">
+                    </div>
+                    <span class="time-total" id="bottomTotalTime">0:00</span>
+                </div>
+            </div>
+
+            <!-- Volume Controls -->
+            <div class="volume-controls">
+                <button class="control-btn" id="bottomVolumeBtn">
+                    <span class="material-icons">volume_up</span>
+                </button>
+                <div class="volume-bar">
+                    <input type="range" class="volume-input" id="bottomVolumeInput" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <!-- Add these script tags before closing </body> -->
+    <script src="main.js"></script>
+    <script src="utils.js"></script>
+    <script src="api.js"></script>
+    <script src="player.js"></script>
+    <script src="search.js"></script>
+    <script src="homepage.js"></script>
+    <script src="library.js"></script>
+    <script src="recentlyPlayed.js"></script>
+    <script src="ui.js"></script>
+    <script src="navigation.js"></script>
+    <script src="core.js"></script>
+
+
+</body>
+</html>
